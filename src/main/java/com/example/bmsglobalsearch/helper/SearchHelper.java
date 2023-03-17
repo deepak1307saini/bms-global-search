@@ -30,9 +30,11 @@ public class SearchHelper {
         movies.addAll(movieRepository.findByDescriptionContaining(keyword));
         movies.addAll(movieRepository.findByDescriptionFuzzy(keyword));
 
-         movies.addAll(movieRepository.findByGenreFuzzy(keyword));
+         movies.addAll(movieRepository.findByGenreFuzzy(keyword.toUpperCase()));
 
-        movies.addAll(movieRepository.findByLanguageFuzzy(keyword));
+
+        movies.addAll(movieRepository.findByLanguageFuzzy(keyword.toUpperCase()));
+        System.out.println(movies);
 
 
         return movies.stream().collect(Collectors.toList());

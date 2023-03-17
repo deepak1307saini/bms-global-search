@@ -24,8 +24,6 @@ public class MovieServiceImpl implements MovieService {
     @Autowired
     MovieHelper movieHelper;
 
-
-
     @Override
     public MovieResponseDto addMovie(MovieDto movieDto) {
         movieHelper.canAdd(movieDto);
