@@ -35,9 +35,8 @@ public class MovieHelper {
     }
 
 
-
     public void canAdd(MovieDto movieDto) {
-        if (movieRepository.existsByNameAndLanguageAndId(movieDto.getName(), movieDto.getLanguage(),movieDto.getId())) {
+        if (movieRepository.existsByNameAndLanguageAndId(movieDto.getName(), movieDto.getLanguage(), movieDto.getId())) {
             throw new DuplicateRecordException(String.format("Movie Already Exists with Name: " + movieDto.getName() + " in Language: " + movieDto.getLanguage()));
         }
     }

@@ -1,4 +1,3 @@
-
 package com.example.bmsglobalsearch.entity;
 
 import com.example.bmsglobalsearch.enums.CertificateType;
@@ -12,7 +11,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
-import javax.persistence.*;
+import javax.persistence.Id;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;

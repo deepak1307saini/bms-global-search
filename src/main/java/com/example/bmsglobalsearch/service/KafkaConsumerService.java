@@ -15,9 +15,15 @@ public class KafkaConsumerService {
     @KafkaListener(topics = "movies", groupId = "search-movie-consumer-group", containerFactory = "movieListenerContainerFactory")
     public void listenMovie(@Header(KafkaHeaders.RECEIVED_KEY) String operation, MovieDto movieDto) {
         switch (operation) {
-            case "add": movieService.addMovie(movieDto); break;
-            case "update": movieService.updateMovie(movieDto.getId(), movieDto); break;
-            case "delete": movieService.deleteMovie(movieDto.getId()); break;
+            case "add":
+                movieService.addMovie(movieDto);
+                break;
+            case "update":
+                movieService.updateMovie(movieDto.getId(), movieDto);
+                break;
+            case "delete":
+                movieService.deleteMovie(movieDto.getId());
+                break;
         }
     }
 }

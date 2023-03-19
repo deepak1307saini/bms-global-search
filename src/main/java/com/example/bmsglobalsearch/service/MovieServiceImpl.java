@@ -1,14 +1,11 @@
 package com.example.bmsglobalsearch.service;
 
-import co.elastic.clients.elasticsearch.ElasticsearchClient;
-import com.example.bmsglobalsearch.repository.MovieRepository;
 import com.example.bmsglobalsearch.dto.MovieDto;
 import com.example.bmsglobalsearch.dto.MovieResponseDto;
 import com.example.bmsglobalsearch.dto.ResponseDto;
 import com.example.bmsglobalsearch.entity.Movie;
 import com.example.bmsglobalsearch.helper.MovieHelper;
 import com.example.bmsglobalsearch.repository.MovieRepository;
-import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

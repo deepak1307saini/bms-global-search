@@ -1,12 +1,10 @@
 package com.example.bmsglobalsearch.helper;
 
 import com.example.bmsglobalsearch.entity.Movie;
-import com.example.bmsglobalsearch.enums.Genre;
 import com.example.bmsglobalsearch.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -18,8 +16,8 @@ public class SearchHelper {
     @Autowired
     MovieRepository movieRepository;
 
-    public List<Movie> searchMovies(String keyword){
-        Set<Movie> movies=new HashSet<>();
+    public List<Movie> searchMovies(String keyword) {
+        Set<Movie> movies = new HashSet<>();
 
         movies.addAll(movieRepository.findByNameContaining(keyword));
         movies.addAll(movieRepository.findByNameFuzzy(keyword));
@@ -30,15 +28,13 @@ public class SearchHelper {
         movies.addAll(movieRepository.findByDescriptionContaining(keyword));
         movies.addAll(movieRepository.findByDescriptionFuzzy(keyword));
 
-         movies.addAll(movieRepository.findByGenreFuzzy(keyword.toUpperCase()));
-
+        movies.addAll(movieRepository.findByGenreFuzzy(keyword.toUpperCase()));
 
         movies.addAll(movieRepository.findByLanguageFuzzy(keyword.toUpperCase()));
         System.out.println(movies);
 
 
         return movies.stream().collect(Collectors.toList());
-
     }
 
 }

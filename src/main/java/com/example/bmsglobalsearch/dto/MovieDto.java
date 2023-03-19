@@ -9,7 +9,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 import java.util.Date;
 import java.util.List;
 
@@ -20,21 +19,17 @@ import java.util.List;
 
 public class MovieDto {
 
-
     private long id;
 
     private String name;
 
     private String description;
 
-
     private Language language;
-
 
     private CertificateType certificateType;
 
     private Date releaseDate;
-
 
     private Genre genre;
 

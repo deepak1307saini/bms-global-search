@@ -1,11 +1,10 @@
-
 package com.example.bmsglobalsearch.enums;
 
 
 public enum CertificateType {
 
-	A,
-	UA,
-	U
+    A,
+    UA,
+    U
 
 }

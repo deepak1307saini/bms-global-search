@@ -13,11 +13,11 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 @NoArgsConstructor
 @Builder
 public class Actor {
-    @Field(type=FieldType.Text)
+    @Field(type = FieldType.Text)
     private String name;
 
-    public Actor(String name){
-        this.name=name;
+    public Actor(String name) {
+        this.name = name;
     }
 }
 
