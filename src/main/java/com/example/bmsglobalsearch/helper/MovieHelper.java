@@ -4,12 +4,16 @@ import com.example.bmsglobalsearch.dto.MovieDto;
 import com.example.bmsglobalsearch.dto.MovieResponseDto;
 import com.example.bmsglobalsearch.entity.Actor;
 import com.example.bmsglobalsearch.entity.Movie;
+import com.example.bmsglobalsearch.enums.CertificateType;
+import com.example.bmsglobalsearch.enums.Genre;
+import com.example.bmsglobalsearch.enums.Language;
 import com.example.bmsglobalsearch.exception.DuplicateRecordException;
 import com.example.bmsglobalsearch.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,18 +29,48 @@ public class MovieHelper {
         movie.setName(movieDto.getName());
         movie.setDescription(movieDto.getDescription());
         movie.setReleaseDate(movieDto.getReleaseDate());
-        movie.setLanguage(movieDto.getLanguage());
-        movie.setGenre(movieDto.getGenre());
-        movie.setCertificateType(movieDto.getCertificateType());
+        movie.setLanguage(Language.valueOf(movieDto.getLanguage().toUpperCase()));
+        movie.setGenre(Genre.valueOf(movieDto.getGenre().toUpperCase()));
+        movie.setCertificateType(CertificateType.valueOf(movieDto.getCertificateType().toUpperCase()));
         movie.setActors(movieDto.getActorNames()
                 .stream()
                 .map(Actor::new)
                 .collect(Collectors.toList()));
     }
 
+    public void checkGenre(String genre) {
+        try {
+            Genre.valueOf(genre.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException(String.format("invalid Genre type, select genre from %s",
+                    Arrays.toString(Genre.class.getEnumConstants())));
+        }
+    }
+
+    public void checkLanguage(String language) {
+        try {
+            Language.valueOf(language.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException(String.format("invalid Language type, select language from %s",
+                    Arrays.toString(Language.class.getEnumConstants())));
+        }
+    }
+
+    public void checkCertificateType(String certificateType) {
+        try {
+            CertificateType.valueOf(certificateType.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException(String.format("invalid Certificate type, select CertificateType from %s",
+                    Arrays.toString(CertificateType.class.getEnumConstants())));
+        }
+    }
+
 
     public void canAdd(MovieDto movieDto) {
-        if (movieRepository.existsByNameAndLanguageAndId(movieDto.getName(), movieDto.getLanguage(), movieDto.getId())) {
+        checkGenre(movieDto.getGenre());
+        checkLanguage(movieDto.getLanguage());
+        checkCertificateType(movieDto.getCertificateType());
+        if (movieRepository.existsByNameAndLanguageAndId(movieDto.getName(), Language.valueOf(movieDto.getLanguage().toUpperCase()), movieDto.getId())) {
             throw new DuplicateRecordException(String.format("Movie Already Exists with Name: " + movieDto.getName() + " in Language: " + movieDto.getLanguage()));
         }
     }
